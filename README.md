@@ -27,7 +27,7 @@ y-axis represents a set of possible events: tick_event
 
 The each cell represents the action that should be performed when received the event under the state.
 
-When you have to handle a complex rule, such as an action should only be performed under a set of specified states, or a group of specific events should be handled differentially for different states, it is better to use a table to describe them and use a table-driven state machine to implement them. For example, using simple state machine, you should have the code to implement above example:
+When you have to handle a complex rule, such as an action should only be performed under a set of specified states, or a group of specific events should be handled differentially for different states, it is better to use a table to describe them and use a table-driven state machine to implement them. For example, using simple state machine, you simply implement above example:
 ```
 from simple_sm import state_machine as sm
 class DeviceCore:
@@ -91,7 +91,7 @@ only the following wildcard characters are supported:
 ```
 
 ## Pass in event
-You have 2 methods to pass in event to a state machine wrapped object:
+You have 2 methods to pass in event to state machine object:
 1) call the method with same name as event
 For example,
 ```

@@ -17,17 +17,18 @@ When you find you have to do with a group of complex rule and conditions, you sh
 * On unplugged state, when it received 'tick_event', it do nothing
 
 We describe this rule by state diagram:
-![Image](./) 
+![Image](./state_diagram.png) 
 
 Also, we may discribe this state transitions by a table:
-|   |   |   |   |   |
-|---|---|---|---|---|
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+
+|  	| unplugged 	| plugged 	|
+|------------	|--------------------------	|----------------------------	|
+| do_plug 	| transit to plugged state 	| no op 	|
+| unplug 	| no op 	| transit to unplugged state 	|
+| tick_event 	| no op 	| read data 	|
 
 x-axis represents a set of possible states: plugged, unplugged
-y-axis represents a set of possible events: tick_event
+y-axis represents a set of possible events: tick_event, do_plug, unplug
 
 The each cell represents the action that should be performed when received the event under the state.
 
@@ -130,9 +131,9 @@ If you want to state machine transit to a specified state, of course, it is not 
 		if some_condition_satisifed:
 			self.next_state = `specified_state`
 ```
+# Bug reports
 
-That's all features of this state machine, please enjoy it.
-
+Hope this small piece of code does your help, if it can make your code more simple, more maintainability, I shall feel happy. If you find any problems, or you have any improvement advice, please contact with me by the following e-mail address:
 -- By woody(li.woodyli@gmail.com)
 
 

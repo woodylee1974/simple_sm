@@ -105,6 +105,21 @@ You also can write the code like the following to define a transition:
 ```
 	sm.add_transit(start, event, end, func)
 ```
+## Define start state
+A state machine must start from a specified state. You may specify the start state by 2 methods:
+
+1) By parameters of constructor
+```
+device = sm.StateMachine('Device', DeviceCore(), start='unplugged', debug=True)
+```
+Here, `start='unplugged'` is to define the start state.
+
+2) By method of state machine
+```
+sm.start_state('unplugged')
+```
+Also, you define the start state to `unplugged`.
+
 
 ## Define event handler by wildcard
 You may define multiple events by wildcard, which share same event handler, like:

@@ -83,7 +83,7 @@ read_data()
 DEBUG:StateMachine:[Device][plugged -- tick_event --> plugged]
 DEBUG:StateMachine:[Device][plugged -- unplug --> unplugged]
 ```
-Notice that, the log of performing function appears before the state transition log.
+Notice that, the log of performing function appears before the log of state transition.
 
 # How to use
 ## Define state table

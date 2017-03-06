@@ -35,20 +35,23 @@ The each cell represents the action that should be performed when received the e
 
 When you have to handle a complex rule, such as an action should only be performed under a set of specified states, or a group of specific events should be handled differentially for different states, it is better to use a table to describe them and use a table-driven state machine to implement them. For example, using simple state machine, you simply implement above example:
 ```
+import sys
+import logging
 from simple_sm import state_machine as sm
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 class DeviceCore:
-	def read_data():
-		print('read_data()')
+    def read_data(self):
+        print('read_data()')
 
-	def handle_tick_event(self, *args, **kwargs):
-		'plugged -- tick_event --> plugged'
-   		self.read_data()
+    def handle_tick_event(self, *args, **kwargs):
+        'plugged -- tick_event --> plugged'
+        self.read_data()
 
-	def do_plug(self, *args, **kwargs):
-		'unplugged -- do_plug --> plugged'
+    def do_plug(self, *args, **kwargs):
+        'unplugged -- do_plug --> plugged'
 
-	def unplug(self, *args, **kwargs):
-		'plugged --> unplug --> unplugged'
+    def unplug(self, *args, **kwargs):
+        'plugged --> unplug --> unplugged'
 
 device = sm.StateMachine('Device', DeviceCore(), start='unplugged', debug=True)
 
@@ -60,8 +63,13 @@ device.unplug()
 
 The log looks like:
 ```
-asfsf
+DEBUG:StateMachine:[Device][unplugged -- tick_event <-- not handled]
+DEBUG:StateMachine:[Device][unplugged -- do_plug --> plugged]
+read_data()
+DEBUG:StateMachine:[Device][plugged -- tick_event --> plugged]
+DEBUG:StateMachine:[Device][plugged -- unplug --> unplugged]
 ```
+Notice that, the log of performing function appears before the state transition log.
 
 # How to use
 ## Define state table

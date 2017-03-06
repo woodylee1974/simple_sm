@@ -109,7 +109,7 @@ You also can write the code like the following to define a transition:
 ## Define event handler by wildcard
 You may define multiple events by wildcard, which share same event handler, like:
 ```
-    def _other_event_market(self, event):
+    def _other_event(self, event):
         'started ---> k_event_* -> started'
         pass
 ```

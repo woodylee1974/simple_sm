@@ -137,10 +137,10 @@ only the following wildcard characters are supported:
 ?  single characters
 ```
 
-## Pass in event
-You have 2 methods to pass in event to state machine object:
+## send event to state machine
+You have 2 methods to send event to state machine object:
 
-1) call the method with same name as event
+1) call the method with the name same as event
 For example,
 ```
 	def nothing_unplug(self, *args, **kwargs):
@@ -152,7 +152,7 @@ may send event to this state machine by calling this function directly, like:
 	device.unplug()
 ```
 
-2) Due to the wildcard event definition, you have to call the function `handle_event` to pass in event:
+2) Due to the wildcard event definition, you have to send event to state machine by calling the function `handle_event`:
 ```
 	device.handle_event('k_event_tick')
 ```
@@ -165,15 +165,17 @@ You may change default end state when you handle an event. Normally, you need no
 		if something_error:
 			return False #This code will refuse to change state to unplugged.
 ```
-In this state machine, `no return`, `return True` default change state to end state as you setting, while `return False` will refuse do such transition.
+In this state machine, `no return` or `return True` means the state transition is done successfully, while `return False` means the state transition is refused.
 
-If you want to state machine transit to a specified state, of course, it is not recommended, you may do like that:
+If you want to state machine transit to a specified state(of course, it is not recommended), you may do like that:
 ```
 	def nothing_unplug(self, *args, **kwargs):
 		'plugged --> unplug --> unplugged'
 		if some_condition_satisifed:
 			self.next_state = `specified_state`
 ```
+Thus, you changed the default destinate state to what you specified.
+
 # Bug reports
 
 Hope this small piece of code does your help, if it can make your code more simple, more maintainability, I shall feel happy. If you find any problems, or you have any improvement advice, please contact with me by the following e-mail address:

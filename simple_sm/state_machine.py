@@ -7,6 +7,7 @@ import fnmatch
 
 log = logging.getLogger("StateMachine")
 
+
 class StateMachine(object):
     def __init__(self, name, handler, **kwargs):
         self.transit_map_ = {}
@@ -19,7 +20,8 @@ class StateMachine(object):
         self.next_state = None
         if 'start' in kwargs:
             self.current_state_ = kwargs['start']
-        self.parser_ = re.compile(r'^(\S*)[\s]*[\-]+[>]?[\s]*(\S*)[\s]*[\-]+>[\s]*(\S*)$')
+        self.parser_ = re.compile(\
+            r'^([^ \t\n\r\f\v\->]*)[\s]*[\-]+[>]?[\s]*([^ \t\n\r\f\v\->]*)[\s]*[\-]+>[\s]*([^ \t\n\r\f\v\->]*)$')
         cls = handler.__class__
         for k, v in cls.__dict__.items():
             if hasattr(v, '__call__') and v.__doc__ is not None:
@@ -105,4 +107,4 @@ class StateMachine(object):
         for (s, v) in self.transit_map_.items():
             print(s, v)
 
-    
+

@@ -28,6 +28,7 @@ Also, we may discribe this state transitions by a table:
 | tick_event 	| no op 	| read data 	|
 
 x-axis represents a set of possible states: plugged, unplugged
+
 y-axis represents a set of possible events: tick_event, do_plug, unplug
 
 The each cell represents the action that should be performed when received the event under the state.

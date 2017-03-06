@@ -134,6 +134,7 @@ If you want to state machine transit to a specified state, of course, it is not 
 # Bug reports
 
 Hope this small piece of code does your help, if it can make your code more simple, more maintainability, I shall feel happy. If you find any problems, or you have any improvement advice, please contact with me by the following e-mail address:
+
 -- By woody(li.woodyli@gmail.com)
 
 

@@ -1,13 +1,13 @@
 # StateMachine
-This state machine is a compact table-driven state machine on Python. In general, a state machine contains a set of states, a set of possible input events and the actions should be performed when an event is recevied on a specified state. A state is changed to another state by performing specified actions.
+This state machine is a compact table-driven state machine on Python. In general, a state machine contains a set of states, a set of possible input events and the actions should be performed when an event is recevied on a specified state. A state is changed to another state by performing specified actions when a specified event is received. State diagram or state table is used to describe state transitions, and the later is more formally, and easier to be implemented correspondingly. Although simply state machine can be implemented by nested switch/case or if/else, considering the requirement of re-usability or maintainable, table-driven state machine pattern is recommended to use for more complex cases.
 
 Where we should use state machine:
 
 * simple parser, lexers, ... or any filter-pattern stuffs
 * UI logic, which represents enable, disable, checked, unchecked and so on.
-* device driver, such as recorder, player, or something like that
+* device control, typical sample is like the control of recorder, player, or something like that
 
-When you find you have to do with a group of complex rule and conditions, you should consider whether or not it is the time for using state machine pattern. A simple example is like:
+When you find you have to do with a group of complex rule and conditions, you should consider to use state machine pattern. A simple example is like:
 
 * A device has 2 states, plugged, unplugged
 * This device driver received 'tick_event' for each 1 second
@@ -16,11 +16,15 @@ When you find you have to do with a group of complex rule and conditions, you sh
 * On plugged state, when it received 'tick_event', it read data from device
 * On unplugged state, when it received 'tick_event', it do nothing
 
-We describe this rule by state digram:
-![Image](http://url/a.png) 
+We describe this rule by state diagram:
+![Image](./) 
 
 Also, we may discribe this state transitions by a table:
-![Image](http://url/a.png) 
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 
 x-axis represents a set of possible states: plugged, unplugged
 y-axis represents a set of possible events: tick_event
@@ -130,5 +134,7 @@ If you want to state machine transit to a specified state, of course, it is not 
 That's all features of this state machine, please enjoy it.
 
 -- By woody(li.woodyli@gmail.com)
+
+
 
 

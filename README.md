@@ -37,6 +37,9 @@ When you have to handle a complex rule, such as an action should only be perform
 ```
 from simple_sm import state_machine as sm
 class DeviceCore:
+	def read_data():
+		print('read_data()')
+
 	def handle_tick_event(self, *args, **kwargs):
 		'plugged -- tick_event --> plugged'
    		self.read_data()
@@ -64,7 +67,7 @@ asfsf
 ## Define state table
 You define state table by 2 methods:
 
-1) by __doc__ of functions
+1) by __doc__ of functions.
 Please check the following example:
 ```
 	def unplug(self, *args, **kwargs):
@@ -99,6 +102,7 @@ only the following wildcard characters are supported:
 
 ## Pass in event
 You have 2 methods to pass in event to state machine object:
+
 1) call the method with same name as event
 For example,
 ```

@@ -137,6 +137,24 @@ only the following wildcard characters are supported:
 ?  single characters
 ```
 
+## Multiple event transitions are mapping to one handler
+It is possible to map multiple event transitions to one handler, as the following:
+```
+	def process_count(self, input_line):
+		'start --> accept_count --> start'
+		'upper_line --> accept_count --> start'
+		do_handle_accept()
+```
+
+## Default Handler
+Set default handler is also possible, when no handler is assigned to a event-transition,
+default handler is called:
+```
+	def process_count(self, input_line):
+		'default_handle'
+		do_handle_accept()
+```
+
 ## send event to state machine
 You have 2 methods to send event to state machine object:
 

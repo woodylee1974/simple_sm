@@ -1,11 +1,10 @@
-__author__ = 'woody'
-
 import sys
 import re
 import fnmatch
+from functools import partial
 
 
-class StateMachine():
+class StateMachine:
     def __init__(self, name, handler, **kwargs):
         self.transit_map_ = {}
         self.name_ = name
@@ -22,8 +21,12 @@ class StateMachine():
             r'^([^ \t\n\r\f\v\->]*)[\s]*[\-]+[>]?[\s]*([^ \t\n\r\f\v\->]*)[\s]*[\-]+>[\s]*([^ \t\n\r\f\v\->]*)$')
         cls = handler.__class__
         for k, v in cls.__dict__.items():
-            if hasattr(v, '__call__') and v.__doc__ is not None:
-                self._add_transit_by(v, v.__doc__)
+            if hasattr(v, '__call__'):
+                if v.__doc__ is not None:
+                    self._add_transit_by(v, v.__doc__)
+                else:
+                    if callable(v):
+                        self.__dict__[k] = partial(v, self.handler_)
 
     def _event_func(self, *args, **kwargs):
         self.handle_event(self.event, *args, **kwargs)
@@ -46,6 +49,11 @@ class StateMachine():
             if fnmatch.fnmatch(item, event):
                 self.event = item
                 return self._event_func
+        if item in self.__dict__:
+            return self.__dict__[item]
+        if item in self.handler_.__dict__:
+            return self.handler_.__dict__[item]
+        return None
 
     def add_transit(self, s0, e, s1, func=None):
         if s0 in self.transit_map_:
@@ -110,4 +118,5 @@ class StateMachine():
     def dump(self):
         for (s, v) in self.transit_map_.items():
             print(s, v)
+
 
